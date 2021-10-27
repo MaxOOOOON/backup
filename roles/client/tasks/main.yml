@@ -9,10 +9,13 @@
   command: yum config-manager --set-enabled powertools
 
 
-- name: Install borgbackup
+- name: Install borgbackup and netcat
   dnf:
-    name: borgbackup
+    name: "{{ item }}"
     state: present
+  loop: 
+     - borgbackup
+     - netcat
 
 - name: SSH KeyGen command
   shell: > 
@@ -34,12 +37,12 @@
 - name: Copy systemd unit
   copy:
     src: files/backup-etc.service
-    dest: /etc/systemd/system
+    dest: /usr/lib/systemd/system/
 
 - name: Copy systemd timer
   copy:
     src: files/backup-etc.timer
-    dest: /etc/systemd/system
+    dest: /usr/lib/systemd/system/
 
 - name: Enable service
   systemd:

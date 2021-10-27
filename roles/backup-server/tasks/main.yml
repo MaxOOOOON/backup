@@ -9,11 +9,13 @@
   command: yum config-manager --set-enabled powertools
 
 
-- name: Install borgbackup
+- name: Install borgbackup and netcat
   dnf:
-    name: borgbackup
+    name: "{{ item }}"
     state: present
-  
+  loop: 
+     - borgbackup
+     - netcat
 
 - name: Create a ext4 filesystem on /dev/sdb
   filesystem:

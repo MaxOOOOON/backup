@@ -4,8 +4,33 @@ file_to_disk = './disk1.vdi'
 
 Vagrant.configure("2") do |config|
 
+
+
+  config.vm.define "client" do |client|
+    client.vm.box = 'centos/8'
+
+    client.vm.provision "ansible" do |ansible|
+      ansible.playbook = "client.yml"
+    end
+
+    client.vm.network :private_network, ip: "10.0.0.31"
+    client.vm.hostname = "client"
+
+    client.vm.provider :virtualbox do |vb|
+      vb.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
+    end
+  end
+
+
+
+
     config.vm.define "backup-server" do |server|
-      config.vm.box = 'centos/8'
+      server.vm.box = 'centos/8'
+
+      server.vm.provision "ansible" do |ansible|
+        ansible.playbook = "server.yml"
+      end
+
         
     #   server.vm.network "forwarded_port", guest: 80, host: 8081
       server.vm.network :private_network, ip: "10.0.0.30"
@@ -20,21 +45,11 @@ Vagrant.configure("2") do |config|
       end
     end
     
-      config.vm.define "client" do |client|
-        client.vm.box = 'centos/8'
-
-        client.vm.network :private_network, ip: "10.0.0.31"
-        client.vm.hostname = "client"
-
-        client.vm.provider :virtualbox do |vb|
-          vb.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
-        end
-      end
-    
-    #   config.vm.provision "ansible" do |ansible|
-    #     ansible.playbook = "playbook.yml"
-    #     ansible.become = "true"
-    #   end
+      
+      # config.vm.provision "ansible" do |ansible|
+      #   ansible.playbook = "playbook.yml"
+      #   ansible.become = "true"
+      # end
 
 
-    end
+end
