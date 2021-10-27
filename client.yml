@@ -1,0 +1,6 @@
+---
+- hosts: client
+  name: Setup client
+  become: yes
+  roles:
+    - role: client
