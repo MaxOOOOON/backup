@@ -25,10 +25,10 @@
 
 
 Проверка, что служба запускается каждые 5 минут     
-![]()   
+![](https://github.com/MaxOOOOON/backup/blob/main/pictures/Screenshot_20211027_220632.png)   
 
 Вывод в лог
-![]()   
+![](https://github.com/MaxOOOOON/backup/blob/main/pictures/Screenshot_20211027_235317.png)   
 
 
 Список копий       
@@ -66,7 +66,7 @@
     cp -r etc/ /
 
 Клиент  
-![]() 
+![](https://github.com/MaxOOOOON/backup/blob/main/pictures/Screenshot_20211027_235142.png) 
 
 Сервер  
-![]()   
+![](https://github.com/MaxOOOOON/backup/blob/main/pictures/Screenshot_20211027_235126.png)   
